@@ -9,14 +9,13 @@
 <link rel="stylesheet" href="./hello.css">
 
 <body>
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-light bg-light header">
         <div class="container-fluid">
           <span class="navbar-brand">Hoon</span>
-          <span class="badge bg-dark">Dark 🔄</span>
           <button class="navbar-toggler" type="button">
             <span class="navbar-toggler-icon"></span>
-            
           </button>
+          
         </div>
       </nav> 
       <ul class="list-group">
@@ -26,6 +25,13 @@
         <li class="list-group-item">A fourth item</li>
         <li class="list-group-item">And a fifth one</li>
       </ul> 
+
+      <div class="main-bg">
+        <h4>Shirts on Sale</h4>
+        <button id="login" class="btn btn-danger">로그인</button>
+      </div>
+
+      <div style="height: 1000px;"></div>
 
       
 
@@ -46,7 +52,7 @@
         </div>
       </div> 
       
-      <button class="button">모달창</button>
+      <button class="buttonModal">모달창</button>
       <div class="alert alert-danger">
         <span class="number">5</span>초 이내 구매시 사은품 증정
       </div>
@@ -68,6 +74,7 @@
      <button class="button-1">1</button>
      <button class="button-2">2</button>
      <button class="button-3">3</button>
+     <button class="button-next">next</button>
 
 </body>
 </html>
@@ -78,7 +85,7 @@ document.querySelectorAll('.navbar-toggler')[0].addEventListener(
     "click", function() {
         document.querySelectorAll('.list-group')[0].classList.add('show')
     })
-    document.querySelector('.button').addEventListener('click', function() {
+    document.querySelector('.buttonModal').addEventListener('click', function() {
     document.querySelector('.black-bg').classList.add('showModal')});
 
     document.querySelector('form').addEventListener('submit', function(e) {
@@ -90,18 +97,6 @@ document.querySelectorAll('.navbar-toggler')[0].addEventListener(
         alert('비밀번호는 6자리 이상')}
     })
 
-    
-
-    let count = 0;
-
-    document.querySelector('.badge').addEventListener('click', function() {
-      if(count % 2 == 0) {
-        document.querySelector('.badge').innerHTML = 'Light🔄';
-      } else {
-        document.querySelector('.badge').innerHTML = 'Dark🔄';
-      }
-      count++;
-    })
 
     let countDown = 5;
 
@@ -112,18 +107,41 @@ document.querySelectorAll('.navbar-toggler')[0].addEventListener(
       }
     }, 1000)
 
+    let curPhoto = 1;
+
     document.querySelector('.button-2').addEventListener('click', function() {
       document.querySelector('.slide-container').style.transform = 'translateX(-100vw)';
+      curPhoto = 2;
     })
 
     document.querySelector('.button-1').addEventListener('click', function() {
       document.querySelector('.slide-container').style.transform = 'translateX(0vw)'
+      curPhoto = 1;
     })
 
     document.querySelector('.button-3').addEventListener('click', function() {
       document.querySelector('.slide-container').style.transform = 'translateX(-200vw)'
+      curPhoto= 0;
     })
 
+    document.querySelector('.button-next').addEventListener('click', function() {
+      document.querySelector('.slide-container').style.transform = 'translateX(-' +curPhoto + '00vw)'
+      curPhoto++;
+
+      if(curPhoto == 3) {
+        curPhoto = 0;
+      }
+
+      
+    })
+
+    window.addEventListener('scroll', function() {
+      if(window.scrollY > 100) {
+        document.querySelector('.navbar-brand').style.fontSize = '10px';
+      } 
+    })
+
+    
   
 
     
